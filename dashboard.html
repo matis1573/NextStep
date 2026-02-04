@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextStep | Espace Recruteur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            /* background: #0a0a0a; Removed to use style.css background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .back-btn-floating {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 24px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .back-btn-floating:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        .visuals-container {
+            display: flex;
+            width: 90%;
+            height: 55%;
+            /* Reduced height */
+            gap: 40px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            position: relative;
+            margin-top: -20px;
+            /* Slight offset */
+        }
+
+        .visual-block {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .visual-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        .visual-img {
+            max-width: 100%;
+            max-height: 70%;
+            object-fit: contain;
+            /* Default State */
+            filter: grayscale(100%) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            opacity: 0;
+            /* Start hidden for animation */
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            /* Entrance Animation */
+            animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* Stagger right image */
+        .visual-block:nth-child(2) .visual-img {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 0.5;
+                /* Target default dimmed state */
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover Reveal Effects */
+        .img-left {
+            box-shadow: none;
+        }
+
+        .img-left:hover {
+            filter: grayscale(0%) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+            opacity: 1;
+            transform: scale(1.05);
+            /* Slight zoom */
+            z-index: 10;
+            border-color: #22c55e;
+            /* Green Border Reveal */
+        }
+
+        .img-right {
+            box-shadow: none;
+        }
+
+        .img-right:hover {
+            filter: grayscale(0%) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+            opacity: 1;
+            transform: scale(1.05);
+            /* Slight zoom */
+            z-index: 10;
+            border-color: #ef4444;
+            /* Red Border Reveal */
+        }
+
+        /* Explanation Box Styles */
+        .explanation-box {
+            width: 700px;
+            max-width: 90%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 35px;
+            text-align: center;
+            margin-top: 20px;
+            z-index: 10;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.5s forwards;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .explanation-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .explanation-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="particles-container" id="particles"></div>
+    <div class="custom-cursor">
+        <div class="cursor-visual"></div>
+    </div>
+    <div class="cursor-glow"></div>
+
+    <a href="index.html" class="back-btn-floating">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
+    <div class="visuals-container">
+        <div class="visual-block">
+            <div class="visual-label" style="color: #ef4444;">Habituellement</div>
+            <img src="assets/dashboard/tree_right.png" alt="Decision Tree Right" class="visual-img img-right">
+        </div>
+        <div class="visual-block">
+            <div class="visual-label" style="color: #22c55e;">AI Active</div>
+            <img src="assets/dashboard/tree_left.png" alt="Decision Tree Left" class="visual-img img-left">
+        </div>
+    </div>
+
+    <div class="explanation-box">
+        <div class="explanation-title">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Pourquoi l'IA est essentielle ?
+        </div>
+        <p class="explanation-text">
+            L'utilisation de l'intelligence artificielle permet d'automatiser le filtrage initial des candidats,
+            réduisant le temps de recrutement de <strong>40%</strong>. En analysant les compétences au-delà des
+            mots-clés simples, notre IA identifie les talents à fort potentiel que les méthodes traditionnelles ignorent
+            souvent, garantissant un taux de rétention supérieur.
+        </p>
+    </div>
+
+    <script>
+        // Particle Logic
+        const container = document.getElementById('particles');
+        const particleCount = 60;
+
+        if (container) {
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 2 + 1;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 10;
+                const drift = (Math.random() - 0.5) * 50;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.bottom = `-10px`;
+                particle.style.setProperty('--drift', drift);
+                particle.style.animation = `float-up ${duration}s linear ${delay}s infinite`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorGlow = document.querySelector('.cursor-glow');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            cursor.style.transform = `translate(${x}px, ${y}px)`;
+            cursorGlow.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
+        });
+
+        document.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
+
+        // Add hover effect for interactive elements
+        document.querySelectorAll('a, button, .visual-img').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+    </script>
+</body>
+
+</html>

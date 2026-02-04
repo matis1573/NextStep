@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "NextStep Extension",
+  "version": "1.0",
+  "description": "Propulsez votre carrière avec l'IA directement depuis votre navigateur.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icons/chrome.png",
+      "32": "assets/icons/chrome.png",
+      "48": "assets/icons/chrome.png",
+      "128": "assets/icons/chrome.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "icons": {
+    "16": "assets/icons/chrome.png",
+    "32": "assets/icons/chrome.png",
+    "48": "assets/icons/chrome.png",
+    "128": "assets/icons/chrome.png"
+  }
+}

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextStep | Premium Experience</title>
+    <meta name="description"
+        content="Plateforme premium connectant recruteurs et étudiants sur NextStep. Découvrez notre démo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
+    <script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page-transition-overlay visible" id="page-loader"></div>
+    <div class="particles-container" id="particles"></div>
+    <div class="custom-cursor">
+        <div class="cursor-visual"></div>
+        <div class="cursor-label">Click !</div>
+    </div>
+    <div class="cursor-glow"></div>
+
+    <nav class="side-nav">
+        <a href="#start" class="side-dot active" title="Commencer"></a>
+        <a href="#features" class="side-dot" title="Features"></a>
+        <a href="#map-section" class="side-dot" title="Localisation"></a>
+        <a href="#download" class="side-dot" title="Télécharger"></a>
+        <a href="#social" class="side-dot" title="Social"></a>
+    </nav>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#start" class="nav-item">Commencer</a>
+            <a href="#features" class="nav-item">Features</a>
+            <a href="#map-section" class="nav-item">Map</a>
+            <a href="#download" class="nav-item">Télécharger</a>
+            <a href="#social" class="nav-item">Social</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="start" class="actions">
+            <h1 class="brand-title reveal">NextStep</h1>
+            <p class="brand-desc reveal reveal-delay-1">La première plateforme d'orientation alimentée par <span
+                    class="highlight-block">l'Intelligence Artificielle</span>.</p>
+            <button id="btn-recruiter" class="btn btn-primary reveal reveal-delay-2">
+                <div class="btn-content">
+                    <span class="btn-title">Espace Recruteur</span>
+                    <span class="btn-desc">Gérez vos offres et trouvez les talents de demain.</span>
+                </div>
+                <span class="btn-action">Démarrer</span>
+                <span class="btn-glimmer"></span>
+            </button>
+            <button id="btn-student" class="btn btn-secondary reveal reveal-delay-2">
+                <div class="btn-content">
+                    <span class="btn-title">Espace Étudiant</span>
+                    <span class="btn-desc">Propulsez votre carrière avec des opportunités uniques.</span>
+                </div>
+                <span class="btn-action">S'inscrire</span>
+                <span class="btn-glimmer"></span>
+            </button>
+            <button id="btn-demo" class="btn btn-outline reveal reveal-delay-2">
+                <div class="btn-content">
+                    <span class="btn-title">Voir la Démo</span>
+                    <span class="btn-desc">Visualisez l'expérience NextStep en action.</span>
+                </div>
+                <span class="btn-action">Découvrir</span>
+                <span class="btn-glimmer"></span>
+            </button>
+        </section>
+
+        <div class="partners-section">
+            <p class="partners-title">Ils nous aident à décrypter les tendances du marché (Stages & Alternances)</p>
+            <div class="partners-grid">
+                <div class="partners-track">
+                    <!-- Set 1 -->
+                    <div class="partner-logo">
+                        <img src="logo/659bc13cdbd659a46cdb03c3_telaqua_horizontal_light.svg" alt="Telaqua">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/Image SVG.svg" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/o.webp" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/QQCfTYmBWM84GU83gcrgY0uQZl8.avif" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/6915ba1ac249dcac1e419498_Votre texte de ggfd-p-500.png" alt="Partner">
+                    </div>
+
+                    <!-- Set 2 (Duplicate for Loop) -->
+                    <div class="partner-logo">
+                        <img src="logo/659bc13cdbd659a46cdb03c3_telaqua_horizontal_light.svg" alt="Telaqua">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/Image SVG.svg" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/o.webp" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/QQCfTYmBWM84GU83gcrgY0uQZl8.avif" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/6915ba1ac249dcac1e419498_Votre texte de ggfd-p-500.png" alt="Partner">
+                    </div>
+
+                    <!-- Set 3 (Extra buffer) -->
+                    <div class="partner-logo">
+                        <img src="logo/659bc13cdbd659a46cdb03c3_telaqua_horizontal_light.svg" alt="Telaqua">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/Image SVG.svg" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/o.webp" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/QQCfTYmBWM84GU83gcrgY0uQZl8.avif" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/6915ba1ac249dcac1e419498_Votre texte de ggfd-p-500.png" alt="Partner">
+                    </div>
+                    <!-- Set 4 (Extra buffer) -->
+                    <div class="partner-logo">
+                        <img src="logo/659bc13cdbd659a46cdb03c3_telaqua_horizontal_light.svg" alt="Telaqua">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/Image SVG.svg" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/o.webp" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/QQCfTYmBWM84GU83gcrgY0uQZl8.avif" alt="Partner">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/6915ba1ac249dcac1e419498_Votre texte de ggfd-p-500.png" alt="Partner">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="separator">
+            <div class="separator-line"></div>
+            <div class="separator-dot"></div>
+            <div class="separator-line"></div>
+        </div>
+
+        <section id="features" class="features">
+            <div class="feature-card reveal reveal-delay-1">
+                <div class="feature-visual">
+                    <img src="assets/icons/Capture_decran_2026-02-02_a_18.17.31 (2).png" alt="Carte de matching">
+                </div>
+                <div class="feature-info">
+                    <h2 class="feature-title">Pathfinder</h2>
+                    <p class="feature-desc">Une carte propulsée par l'IA pour localiser instantanément les meilleures
+                        alternances adaptées à votre profil.</p>
+                </div>
+            </div>
+            <div class="feature-card reveal reveal-delay-2">
+                <div class="feature-visual centered-icon">
+                    <img src="assets/icons/ai.png" alt="Statistiques">
+                </div>
+                <div class="feature-info">
+                    <h2 class="feature-title">Assistant IA de Carrière</h2>
+                    <p class="feature-desc">Votre assistant personnel intelligent vous guide vers les meilleurs
+                        employeurs pour garantir votre succès.</p>
+                </div>
+            </div>
+            <div class="feature-card reveal reveal-delay-3">
+                <div class="feature-visual centered-icon">
+                    <img src="assets/icons/chat.png" alt="Support Chat">
+                </div>
+                <div class="feature-info">
+                    <h2 class="feature-title">Connexion Directe</h2>
+                    <p class="feature-desc">Étudiants et recruteurs communiquent sans barrière pour des échanges fluides
+                        sur vos stages et alternances.</p>
+                </div>
+            </div>
+            <div class="feature-card full-width reveal reveal-delay-4">
+                <div class="stat-display">
+                    <span class="stat-value" data-target="12840">0</span>
+                    <span class="stat-unit">Demandes d'alternance</span>
+                </div>
+                <div class="feature-info">
+                    <h2 class="feature-title">Flux d'Opportunités</h2>
+                    <p class="feature-desc">Connectez-vous au plus grand réseau de recrutement étudiant en temps réel.
+                        Chaque chiffre représente une future collaboration réussie.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="separator">
+            <div class="separator-line"></div>
+            <div class="separator-dot"></div>
+            <div class="separator-line"></div>
+        </div>
+
+        <section id="map-section" class="map-section reveal">
+            <div class="feature-info" style="text-align: center; margin-bottom: 2rem;">
+                <h2 class="feature-title system-title">Pathfinder</h2>
+                <p class="feature-desc">Connectez-vous aux opportunités partout dans le monde.</p>
+            </div>
+            <div id="map" class="map-container" data-lenis-prevent></div>
+        </section>
+
+        <div class="separator reveal">
+            <div class="separator-line"></div>
+            <div class="separator-dot"></div>
+            <div class="separator-line"></div>
+        </div>
+
+        <section id="download" class="download-section reveal">
+            <div class="feature-info" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="brand-title"
+                    style="font-size: 4rem; margin-bottom: 1rem; display: block; text-align: center; width: 100%;">Notre
+                    Extension</h2>
+                <h3 class="feature-title" style="font-size: 1.5rem; opacity: 0.8;">Disponible partout</h3>
+                <p class="feature-desc">Emportez votre carrière avec vous. Téléchargez l'extension NextStep.</p>
+            </div>
+            <div class="download-buttons" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <!-- Chrome (Active) -->
+                <button class="btn btn-primary btn-download"
+                    style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 8px 20px;">
+                    <img src="assets/icons/chrome.png" alt="Chrome" style="width: 24px; height: 24px;">
+                    <div style="text-align: left; line-height: 1.2;">
+                        <span style="font-size: 10px; opacity: 0.8; display: block;">Disponible sur</span>
+                        <span style="font-size: 14px; font-weight: 600;">Chrome Web Store</span>
+                    </div>
+                </button>
+
+                <!-- Firefox (Soon) -->
+                <button class="btn btn-primary btn-download"
+                    style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 8px 20px; opacity: 0.4; pointer-events: none; border-color: rgba(255,255,255,0.1) !important;">
+                    <img src="assets/icons/firefox.png" alt="Firefox" style="width: 24px; height: 24px;">
+                    <div style="text-align: left; line-height: 1.2;">
+                        <span style="font-size: 10px; opacity: 0.8; display: block;">Bientôt sur</span>
+                        <span style="font-size: 14px; font-weight: 600;">Firefox Add-ons</span>
+                    </div>
+                </button>
+
+                <!-- Safari (Soon) -->
+                <button class="btn btn-primary btn-download"
+                    style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 8px 20px; opacity: 0.4; pointer-events: none; border-color: rgba(255,255,255,0.1) !important;">
+                    <img src="assets/icons/safari.png" alt="Safari" style="width: 24px; height: 24px;">
+                    <div style="text-align: left; line-height: 1.2;">
+                        <span style="font-size: 10px; opacity: 0.8; display: block;">Bientôt sur</span>
+                        <span style="font-size: 14px; font-weight: 600;">Safari Web</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <div class="separator reveal">
+            <div class="separator-line"></div>
+            <div class="separator-dot"></div>
+            <div class="separator-line"></div>
+        </div>
+
+        <section id="social" class="social-section">
+            <div class="feature-info reveal" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="feature-title">Alertes Instantanées</h2>
+                <p class="feature-desc">Recevez les meilleures offres en temps réel sur votre application favorite.</p>
+            </div>
+            <div class="social-grid">
+                <div class="social-card reveal reveal-delay-1">
+                    <div class="social-icon">
+                        <img src="assets/icons/discord.png" alt="Discord">
+                    </div>
+                    <div class="social-info">
+                        <h3>Discord</h3>
+                        <p>Rejoignez notre serveur pour des alertes ciblées.</p>
+                    </div>
+                </div>
+                <div class="social-card reveal reveal-delay-2">
+                    <div class="social-icon">
+                        <img src="assets/icons/whatsapp.png" alt="WhatsApp">
+                    </div>
+                    <div class="social-info">
+                        <h3>WhatsApp</h3>
+                        <p>Recevez une notification directe sur votre mobile.</p>
+                    </div>
+                </div>
+                <div class="social-card reveal reveal-delay-3">
+                    <div class="social-icon">
+                        <img src="assets/icons/telegram.png" alt="Telegram">
+                    </div>
+                    <div class="social-info">
+                        <h3>Telegram</h3>
+                        <p>Un flux ultra-rapide et sécurisé pour vos offres.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-canvas-container">
+            <svg id="connection-lines" class="connection-svg"></svg>
+        </div>
+        <div class="footer-content">
+            <h2 class="footer-brand reveal">NextStep</h2>
+            <p class="footer-copyright">© 2026 NextStep. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Modal -->
+    <div id="discord-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body" style="margin-bottom: 0;">
+                <p class="modal-desc">Voici un aperçu de l'alerte que vous recevrez instantanément dès qu'une nouvelle
+                    offre est publiée sur le réseau.</p>
+                <div class="embed-container">
+                    <div class="discord-embed">
+                        <div class="embed-pill"></div>
+                        <div class="embed-content">
+                            <div class="embed-author">
+                                <span class="author-name">NextStep Bot</span>
+                            </div>
+                            <div class="embed-title">Nouvelle offre : Développeur Web (H/F)</div>
+                            <div class="embed-description">Une opportunité exceptionnelle en alternance au cœur de
+                                Marseille. Profil junior accepté avec bases en JS.</div>
+                            <div class="embed-fields">
+                                <div class="embed-field">
+                                    <div class="field-name">📍 Lieu</div>
+                                    <div class="field-value">Marseille (13)</div>
+                                </div>
+                                <div class="embed-field">
+                                    <div class="field-name">💰 Rémunération</div>
+                                    <div class="field-value">1100€ - 1400€ / mois</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="embed-actions">
+                        <button class="embed-btn">Postuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Selection Screen -->
+    <div id="demo-selection" class="demo-overlay">
+        <div class="demo-content">
+            <div class="demo-options">
+                <div class="choice-card" id="choice-recruiter">
+                    <h3>Recruteur</h3>
+                    <p>Je recherche des talents</p>
+                </div>
+                <div class="choice-card" id="choice-student">
+                    <h3>Étudiant</h3>
+                    <p>Je cherche une opportunité</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Demo Map Modal -->
+    <div id="student-demo-modal" class="modal-overlay"
+        style="z-index: 200000; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); align-items: stretch; justify-content: flex-start; padding: 0;">
+        <!-- Main Content Wrapper (Left Sidebar + Map) -->
+        <div class="student-main-content"
+            style="flex: 1; display: flex; flex-direction: column; margin: 0; height: 100%; border: none; border-right: none; border-radius: 0; overflow: hidden; box-shadow: none; background: rgba(10, 10, 10, 0.65); backdrop-filter: blur(20px);">
+
+            <!-- Content Area (Sidebar + Map) -->
+            <div class="student-content-area" style="flex: 1; display: flex; overflow: hidden;">
+                <div class="student-left-sidebar"
+                    style="width: 420px; background-color: #121212; background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px); background-size: 30px 30px; border-right: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 1; display: flex; flex-direction: column;">
+
+                    <!-- Header -->
+                    <div
+                        style="padding: 1rem 2.5rem 1rem 0.5rem; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <i id="close-student-demo-arrow" class="fa-solid fa-arrow-left"
+                            style="font-size: 16px; color: white; opacity: 0.6; cursor: pointer; position: absolute; left: 1.2rem; transition: opacity 0.2s;"></i>
+                        <h1 class="brand-title"
+                            style="font-size: 1.8rem; letter-spacing: -1px; margin: 0; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); width: 100%; text-align: center;">
+                            NextStep
+                        </h1>
+                        <!-- Add click listener to arrow in script.js by ID reuse or new ID -->
+                    </div>
+
+                    <!-- PDF Drop Zone -->
+                    <div style="padding: 0 2.5rem 0 0.5rem; flex: 1;">
+                        <div class="pdf-drop-zone"
+                            style="height: 200px; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #151515; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; overflow: hidden;">
+
+                            <!-- Animated Background Glow -->
+                            <div class="drop-glow"
+                                style="position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15), transparent 70%); opacity: 0; transition: opacity 0.3s ease;">
+                            </div>
+
+                            <div class="icon-container"
+                                style="width: 48px; height: 48px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.05); z-index: 2;">
+                                <i class="fa-solid fa-file-arrow-up" style="font-size: 1.2rem; color: #e0e0e0;"></i>
+                            </div>
+
+                            <h3
+                                style="color: white; font-size: 0.95rem; font-weight: 500; margin-bottom: 0.4rem; z-index: 2;">
+                                Déposez votre CV</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.8rem; text-align: center; z-index: 2;">
+                                PDF uniquement (Max 5Mo)</p>
+
+                            <style>
+                                .pdf-drop-zone:hover {
+                                    border-color: rgba(255, 255, 255, 0.4) !important;
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+                                }
+
+                                .pdf-drop-zone:hover .drop-glow {
+                                    opacity: 1 !important;
+                                }
+
+                                .pdf-drop-zone:hover .icon-container {
+                                    background: rgba(255, 255, 255, 0.1) !important;
+                                    border-color: rgba(255, 255, 255, 0.2) !important;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+                <div id="student-demo-map"
+                    style="flex: 1; position: relative; overflow: hidden; border-radius: 40px 0 0 40px; margin-left: -40px; z-index: 5; box-shadow: -10px 0 30px rgba(0,0,0,0.5);">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- AI Assistant Orb -->
+    <div class="ai-assistant-orb" id="ai-assistant-trigger">
+        <div class="orb-container">
+            <div class="orb-visual"></div>
+            <div class="orb-waves">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="orb-glow"></div>
+        </div>
+        <div class="orb-tooltip">Assistant IA</div>
+    </div>
+
+    <!-- AI Chat Popup -->
+    <div class="ai-chat-popup" id="ai-chat-popup">
+        <div class="chat-header">
+            <div class="chat-status"></div>
+            <span>Assistant NextStep</span>
+            <button class="close-chat" id="close-ai-chat">&times;</button>
+        </div>
+        <div class="chat-body" id="ai-chat-body">
+            <div class="chat-message bot">
+                Bonjour ! Je suis l'assistant NextStep. Comment puis-je vous aider aujourd'hui ?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="ai-chat-input" placeholder="Poser une question...">
+            <button id="send-ai-chat"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Dashboard has been moved to dashboard.html -->
+    <script src="script.js"></script>
+</body>
+
+</html>

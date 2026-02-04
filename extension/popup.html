@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextStep Extension</title>
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="popup-container">
+        <header>
+            <h1 class="brand">NextStep</h1>
+            <div class="status-dot"></div>
+        </header>
+
+        <main>
+            <div class="welcome-box">
+                <h2>Bonjour !</h2>
+                <p>Prêt pour votre prochaine étape ?</p>
+            </div>
+
+            <div class="scan-section">
+                <button class="btn-scan" id="scan-page">
+                    <i class="fa-solid fa-radar"></i>
+                    <span>Scanner cette page</span>
+                </button>
+                <div id="scan-results" class="scan-results hidden">
+                    <div class="analysis-loader">
+                        <div class="spinner"></div>
+                        <span>Analyse IA en cours...</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+            <button class="btn-main">Ouvrir NextStep</button>
+        </footer>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
