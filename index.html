@@ -12,7 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
     <script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="rome_database.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -370,13 +375,13 @@
     <div id="student-demo-modal" class="modal-overlay"
         style="z-index: 200000; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); align-items: stretch; justify-content: flex-start; padding: 0;">
         <!-- Main Content Wrapper (Left Sidebar + Map) -->
-        <div class="student-main-content"
+        <div class="student-main-content" data-lenis-prevent
             style="flex: 1; display: flex; flex-direction: column; margin: 0; height: 100%; border: none; border-right: none; border-radius: 0; overflow: hidden; box-shadow: none; background: rgba(10, 10, 10, 0.65); backdrop-filter: blur(20px);">
 
             <!-- Content Area (Sidebar + Map) -->
             <div class="student-content-area" style="flex: 1; display: flex; overflow: hidden;">
-                <div class="student-left-sidebar"
-                    style="width: 380px; background-color: #121212; border-right: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 1; display: flex; flex-direction: column;">
+                <div class="student-left-sidebar" data-lenis-prevent
+                    style="width: 380px; background-color: #121212; border-right: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 1; display: flex; flex-direction: column; overflow: hidden;">
 
                     <!-- Header -->
                     <div
@@ -391,7 +396,7 @@
                     </div>
 
                     <!-- PDF Drop Zone & Results Container -->
-                    <div style="flex: 1; display: flex; flex-direction: column;">
+                    <div style="flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden;">
                         <div class="pdf-drop-zone" id="drop-zone"
                             style="height: 200px; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #151515; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; overflow: hidden; margin: 0 1.5rem 1rem 1.5rem;">
                             <input type="file" id="cv-upload" accept=".pdf" style="display: none;">
@@ -430,18 +435,94 @@
                                     background: rgba(255, 255, 255, 0.1) !important;
                                     border-color: rgba(255, 255, 255, 0.2) !important;
                                 }
+
+                                #offers-list::-webkit-scrollbar {
+                                    width: 4px;
+                                }
+
+                                #offers-list::-webkit-scrollbar-track {
+                                    background: transparent;
+                                }
+
+                                #offers-list::-webkit-scrollbar-thumb {
+                                    background: rgba(255, 255, 255, 0.1);
+                                    border-radius: 10px;
+                                }
+
+                                #offers-list::-webkit-scrollbar-thumb:hover {
+                                    background: rgba(255, 255, 255, 0.2);
+                                }
                             </style>
                         </div>
 
+                        <!-- Search Type Filter (Visible initially) -->
+                        <div id="search-type-selection" style="padding: 0 1.5rem 1rem 1.5rem;">
+                            <div class="filter-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                <span class="filter-label"
+                                    style="color: rgba(255,255,255,0.3); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; padding-left: 4px;">Je
+                                    recherche :</span>
+                                <div class="custom-dropdown" id="dropdown-search-type">
+                                    <div class="dropdown-trigger">
+                                        <span class="trigger-label">Alternance</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    <div class="dropdown-options">
+                                        <div class="option" data-value="ecole">École</div>
+                                        <div class="option selected" data-value="alternance">Alternance</div>
+                                        <div class="option" data-value="stage">Stage</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Filter: Private/Public (Conditional) -->
+                        <div id="school-type-selection" style="padding: 0 1.5rem 1rem 1.5rem; display: none;">
+                            <div class="filter-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                <span class="filter-label"
+                                    style="color: rgba(255,255,255,0.3); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; padding-left: 4px;">Type
+                                    d'établissement :</span>
+                                <div class="custom-dropdown" id="dropdown-school-type">
+                                    <div class="dropdown-trigger">
+                                        <span class="trigger-label">Privé</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    <div class="dropdown-options">
+                                        <div class="option selected" data-value="prive">Privé</div>
+                                        <div class="option" data-value="publique">Publique</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Third Filter: Lycée/Fac (Conditional) -->
+                        <div id="school-level-selection" style="padding: 0 1.5rem 1rem 1.5rem; display: none;">
+                            <div class="filter-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                <span class="filter-label"
+                                    style="color: rgba(255,255,255,0.3); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; padding-left: 4px;">Niveau
+                                    d'étude :</span>
+                                <div class="custom-dropdown" id="dropdown-school-level">
+                                    <div class="dropdown-trigger">
+                                        <span class="trigger-label">Lycée</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    <div class="dropdown-options">
+                                        <div class="option selected" data-value="lycee">Lycée</div>
+                                        <div class="option" data-value="fac">Fac</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- CV Results (Hidden initially) -->
-                        <div id="cv-results-container" class="hidden"
-                            style="padding: 1.5rem 0 0 0; display: flex; flex-direction: column; gap: 1rem;">
+                        <div id="cv-results-container" class="hidden" data-lenis-prevent
+                            style="padding: 1.5rem 0 0 0; display: flex; flex-direction: column; gap: 1rem; flex: 1; min-height: 0; overflow: hidden;">
                             <h4
-                                style="color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; text-align: center; width: 100%;">
-                                Resultat</h4>
+                                style="color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; text-align: center; width: 100%;">
+                                Résultat</h4>
 
                             <!-- Custom Filters -->
-                            <div class="results-filters" style="padding: 0 1rem 1rem 1rem; display: flex; gap: 12px;">
+                            <div class="results-filters"
+                                style="padding: 0 1rem; display: flex; gap: 12px; flex-shrink: 0;">
 
                                 <!-- Status Filter -->
                                 <div class="filter-group"
@@ -480,7 +561,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="offers-list" style="display: flex; flex-direction: column; gap: 0.8rem;">
+                            <div id="offers-list" data-lenis-prevent
+                                style="display: flex; flex-direction: column; gap: 0.8rem; overflow-y: auto; flex: 1; padding: 0 1.5rem 2rem 1.5rem; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent; pointer-events: auto !important; touch-action: pan-y !important;">
                                 <!-- Offers will be injected here -->
                             </div>
                         </div>
@@ -539,6 +621,15 @@
                                         style="position: absolute; top: 0; left: 0; right: 50px; bottom: 0; padding: 15px; font-size: 14px; color: transparent; pointer-events: none; white-space: pre; overflow: hidden; display: flex; align-items: center; font-family: inherit;">
                                     </div>
 
+                                    <!-- Upload CV Button -->
+                                    <button id="btn-upload-cv" title="Analyser mon CV"
+                                        style="width: 32px; height: 32px; background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 8px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: background 0.3s;">
+                                        <i class="fa-solid fa-file-arrow-up" style="font-size: 14px;"></i>
+                                    </button>
+
+                                    <input type="file" id="cv-upload-input" accept=".pdf,.doc,.docx"
+                                        style="display: none;">
+
                                     <input type="text" id="student-ai-input"
                                         placeholder="Posez votre question... (@entreprise)"
                                         style="flex: 1; background: transparent; border: none; color: white; padding: 10px; font-size: 14px; outline: none; position: relative; z-index: 1; caret-color: white;">
@@ -577,7 +668,8 @@
                     <!-- Company Detail Popup (Centered on Map) -->
                     <div id="company-detail-popup" class="map-overlay hidden">
                         <div class="company-detail-card">
-                            <i id="close-company-detail" class="fa-solid fa-xmark close-detail"></i>
+                            <i id="close-company-detail" class="fa-solid fa-xmark close-detail"
+                                onclick="document.getElementById('company-detail-popup').classList.add('hidden')"></i>
                             <div class="detail-header">
                                 <div id="detail-logo" class="detail-logo"></div>
                                 <div class="detail-title-group">
@@ -636,7 +728,9 @@
                                     </div>
                                 </div>
                                 <div class="detail-footer">
-                                    <button class="btn-nav apply-btn">Postuler maintenant</button>
+                                    <button class="btn-nav apply-btn"
+                                        onclick="showNotification('Candidature envoyée avec succès !'); document.getElementById('company-detail-popup').classList.add('hidden')">Postuler
+                                        maintenant</button>
                                 </div>
                             </div>
                         </div>
@@ -691,6 +785,7 @@
     </div>
 
     <!-- Dashboard has been moved to dashboard.html -->
+    <script src="schools_db.js"></script>
     <script src="script.js"></script>
 </body>
 

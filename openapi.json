@@ -1,0 +1,595 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "NextStep API",
+        "description": "API de matching pédagogique pour alternances basée sur les référentiels ROME et RNCP. Permet aux étudiants de trouver des offres compatibles avec leur formation, et aux entreprises de publier des offres validées pédagogiquement.",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Équipe NextStep",
+            "url": "https://matis1573.github.io/NextStep/",
+            "email": "contact@nextstep.fr"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://api.nextstep.fr/v1",
+            "description": "Serveur de production"
+        },
+        {
+            "url": "https://api-staging.nextstep.fr/v1",
+            "description": "Serveur de test"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Offres",
+            "description": "Gestion des offres d'alternance"
+        },
+        {
+            "name": "Matching",
+            "description": "Algorithme de matching pédagogique"
+        },
+        {
+            "name": "ROME",
+            "description": "Référentiel métiers ROME"
+        },
+        {
+            "name": "RNCP",
+            "description": "Référentiel certifications RNCP"
+        },
+        {
+            "name": "Étudiants",
+            "description": "Profils étudiants"
+        }
+    ],
+    "paths": {
+        "/offres": {
+            "get": {
+                "tags": [
+                    "Offres"
+                ],
+                "summary": "Récupérer les offres d'alternance",
+                "description": "Retourne la liste des offres enrichies avec codes ROME et compatibilité RNCP",
+                "parameters": [
+                    {
+                        "name": "codeROME",
+                        "in": "query",
+                        "description": "Filtrer par code ROME (ex: M1805)",
+                        "schema": {
+                            "type": "string",
+                            "example": "M1805"
+                        }
+                    },
+                    {
+                        "name": "ville",
+                        "in": "query",
+                        "description": "Filtrer par ville",
+                        "schema": {
+                            "type": "string",
+                            "example": "Marseille"
+                        }
+                    },
+                    {
+                        "name": "distance",
+                        "in": "query",
+                        "description": "Rayon de recherche en km",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "codeRNCP",
+                        "in": "query",
+                        "description": "Filtrer par certification RNCP",
+                        "schema": {
+                            "type": "string",
+                            "example": "RNCP35475"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des offres",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Offre"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Offres"
+                ],
+                "summary": "Créer une nouvelle offre",
+                "description": "Permet aux entreprises de publier une offre (validation ROME/RNCP automatique)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NouvelleOffre"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Offre créée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Offre"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Offre non conforme au référentiel RNCP"
+                    }
+                }
+            }
+        },
+        "/offres/{id}": {
+            "get": {
+                "tags": [
+                    "Offres"
+                ],
+                "summary": "Détails d'une offre",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de l'offre",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Offre"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/matching": {
+            "post": {
+                "tags": [
+                    "Matching"
+                ],
+                "summary": "Calculer le matching pédagogique",
+                "description": "Compare un profil étudiant avec une offre selon les référentiels ROME et RNCP",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "profilEtudiant": {
+                                        "$ref": "#/components/schemas/ProfilEtudiant"
+                                    },
+                                    "offreId": {
+                                        "type": "string",
+                                        "example": "offre-123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Résultat du matching",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultatMatching"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rome/{code}": {
+            "get": {
+                "tags": [
+                    "ROME"
+                ],
+                "summary": "Détails d'un code ROME",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "M1805"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails du métier ROME",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CodeROME"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rncp/{code}": {
+            "get": {
+                "tags": [
+                    "RNCP"
+                ],
+                "summary": "Détails d'une certification RNCP",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "RNCP35475"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de la certification",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CertificationRNCP"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/etudiants/profil": {
+            "post": {
+                "tags": [
+                    "Étudiants"
+                ],
+                "summary": "Analyser un CV",
+                "description": "Extrait les compétences et détermine le code ROME du profil",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "cv": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profil analysé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfilEtudiant"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Offre": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "offre-123"
+                    },
+                    "entreprise": {
+                        "type": "string",
+                        "example": "Airbus"
+                    },
+                    "intitule": {
+                        "type": "string",
+                        "example": "Développeur Full Stack IA"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "codeROME": {
+                        "type": "string",
+                        "example": "M1805"
+                    },
+                    "libelleROME": {
+                        "type": "string",
+                        "example": "Études et développement informatique"
+                    },
+                    "competencesROME": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Programmation orientée objet",
+                            "Développement web"
+                        ]
+                    },
+                    "codeRNCP": {
+                        "type": "string",
+                        "example": "RNCP35475"
+                    },
+                    "formationsCompatibles": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "BUT Informatique",
+                            "Licence Pro Développement"
+                        ]
+                    },
+                    "localisation": {
+                        "type": "object",
+                        "properties": {
+                            "ville": {
+                                "type": "string",
+                                "example": "Marseille"
+                            },
+                            "latitude": {
+                                "type": "number",
+                                "example": 43.2965
+                            },
+                            "longitude": {
+                                "type": "number",
+                                "example": 5.3698
+                            }
+                        }
+                    },
+                    "typeContrat": {
+                        "type": "string",
+                        "enum": [
+                            "Apprentissage",
+                            "Professionnalisation"
+                        ],
+                        "example": "Apprentissage"
+                    },
+                    "datePublication": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "NouvelleOffre": {
+                "type": "object",
+                "required": [
+                    "entreprise",
+                    "intitule",
+                    "description"
+                ],
+                "properties": {
+                    "entreprise": {
+                        "type": "string"
+                    },
+                    "intitule": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "competencesRequises": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "ville": {
+                        "type": "string"
+                    },
+                    "typeContrat": {
+                        "type": "string",
+                        "enum": [
+                            "Apprentissage",
+                            "Professionnalisation"
+                        ]
+                    }
+                }
+            },
+            "ProfilEtudiant": {
+                "type": "object",
+                "properties": {
+                    "nom": {
+                        "type": "string",
+                        "example": "Sophie Martin"
+                    },
+                    "formation": {
+                        "type": "string",
+                        "example": "BUT Informatique"
+                    },
+                    "codeRNCP": {
+                        "type": "string",
+                        "example": "RNCP35475"
+                    },
+                    "competences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "React",
+                            "Node.js",
+                            "Python"
+                        ]
+                    },
+                    "localisation": {
+                        "type": "object",
+                        "properties": {
+                            "ville": {
+                                "type": "string"
+                            },
+                            "latitude": {
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                }
+            },
+            "ResultatMatching": {
+                "type": "object",
+                "properties": {
+                    "score": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100,
+                        "example": 85
+                    },
+                    "competencesAcquises": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Développement web",
+                            "Programmation orientée objet"
+                        ]
+                    },
+                    "competencesManquantes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Gestion de bases de données"
+                        ]
+                    },
+                    "conformiteRNCP": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "explication": {
+                        "type": "string",
+                        "example": "Votre profil correspond à 85% au référentiel ROME M1805. Votre formation BUT Informatique couvre les compétences requises."
+                    }
+                }
+            },
+            "CodeROME": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "example": "M1805"
+                    },
+                    "libelle": {
+                        "type": "string",
+                        "example": "Études et développement informatique"
+                    },
+                    "definition": {
+                        "type": "string"
+                    },
+                    "competences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "formations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "CertificationRNCP": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "example": "RNCP35475"
+                    },
+                    "intitule": {
+                        "type": "string",
+                        "example": "BUT - Informatique"
+                    },
+                    "niveau": {
+                        "type": "string",
+                        "example": "Niveau 6 (Bac+3)"
+                    },
+                    "competences": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "libelle": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "codesROMEAssocies": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "M1805",
+                            "M1806"
+                        ]
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-API-Key"
+            }
+        }
+    },
+    "security": [
+        {
+            "ApiKeyAuth": []
+        }
+    ]
+}

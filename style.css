@@ -1763,16 +1763,27 @@ canvas.maplibregl-canvas,
 
 .close-detail {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    font-size: 20px;
-    color: rgba(255, 255, 255, 0.3);
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10000;
+    pointer-events: auto !important;
 }
 
 .close-detail:hover {
+    background: rgba(255, 255, 255, 0.15);
     color: white;
+    transform: rotate(90deg) scale(1.1);
 }
 
 .detail-header {
@@ -1791,12 +1802,21 @@ canvas.maplibregl-canvas,
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.detail-title-group {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
 .detail-title-group h2 {
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
     letter-spacing: -0.5px;
     color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .detail-title-group p {
@@ -1804,6 +1824,9 @@ canvas.maplibregl-canvas,
     color: var(--accent-blue);
     margin: 4px 0 0 0;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .detail-body {
@@ -2008,6 +2031,9 @@ canvas.maplibregl-canvas,
     color: rgba(255, 255, 255, 0.5);
     font-size: 0.8rem;
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .offer-item:hover .offer-actions {
