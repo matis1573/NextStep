@@ -167,7 +167,7 @@ body::-webkit-scrollbar {
 .cursor-visual {
     width: 40px;
     height: 40px;
-    background-image: url('../assets/arrow.cur');
+    background-image: url('arrow.cur');
     background-size: contain;
     background-repeat: no-repeat;
     transform-origin: 0 0;
