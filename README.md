@@ -1,9 +1,12 @@
 <div align="center">
+  <img src="public/assets/banner.png" alt="NextStep Banner" width="100%" style="border-radius: 10px; margin-bottom: 20px;">
+
   <h1 align="center">NextStep AI</h1>
   
   <p align="center">
     <strong>L'Orientation Professionnelle Réinventée par l'Intelligence Artificielle Locale</strong>
   </p>
+
 
   <p align="center">
     <a href="#-fonctionnalités">Fonctionnalités</a> •
@@ -105,6 +108,5 @@ graph TD
 ---
 
 <div align="center">
-  <p>Fait avec ❤️ pour le Hackathon NextStep</p>
   <p>© 2026 NextStep AI - Tous droits réservés.</p>
 </div>
