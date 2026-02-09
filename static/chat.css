@@ -1,0 +1,112 @@
+/* static/chat.css ------------------------------------------------- */
+.chat-box {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.messages {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.msg {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    max-width: 85%;
+}
+
+.msg.user {
+    background: #4f46e5;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+.msg.assistant {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e5e7eb;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.msg.error {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    align-self: center;
+    font-size: 0.85rem;
+}
+
+textarea#prompt {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.8rem;
+    color: white;
+    resize: none;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+textarea#prompt:focus {
+    outline: none;
+    border-color: #4f46e5;
+}
+
+button#sendBtn {
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
+    width: 100%;
+}
+
+button#sendBtn:hover {
+    background: #4338ca;
+}
+
+button#sendBtn:active {
+    transform: scale(0.98);
+}
+
+button#sendBtn:disabled {
+    background: #374151;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Scrollbar styling */
+.messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}

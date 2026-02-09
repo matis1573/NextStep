@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Analyse CV - Ollama</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .drop-zone {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f8f9ff;
+        }
+
+        .drop-zone:hover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+        }
+
+        .drop-zone.active {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: none;
+        }
+
+        #result.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card p {
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f4f6;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🤖 Test Analyse CV avec Ollama</h1>
+        <p class="subtitle">Déposez votre CV PDF pour tester l'extraction d'informations par IA</p>
+
+        <div class="drop-zone" id="dropZone">
+            <div class="icon">📄</div>
+            <p style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Déposez votre CV ici</p>
+            <p style="color: #666; font-size: 14px;">ou cliquez pour sélectionner un fichier PDF</p>
+        </div>
+
+        <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+
+        <div id="result">
+            <h2 style="margin-bottom: 20px;">📊 Résultats de l'analyse</h2>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const result = document.getElementById('result');
+        const resultContent = document.getElementById('resultContent');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('active');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('active');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('active');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === 'application/pdf') {
+                handleFile(file);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) handleFile(file);
+        });
+
+        async function extractTextFromPDF(file) {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            let fullText = '';
+
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const textContent = await page.getTextContent();
+                const pageText = textContent.items.map(item => item.str).join(' ');
+                fullText += pageText + ' ';
+            }
+            return fullText;
+        }
+
+        async function handleFile(file) {
+            result.classList.remove('show');
+            dropZone.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p style="font-weight: 600; margin-bottom: 8px;">Extraction du texte...</p>
+                    <p style="color: #666; font-size: 14px;">${file.name}</p>
+                </div>
+            `;
+
+            try {
+                // 1. Extraire le texte
+                const text = await extractTextFromPDF(file);
+                console.log("Texte extrait:", text.substring(0, 200));
+
+                dropZone.innerHTML = `
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p style="font-weight: 600; margin-bottom: 8px;">Analyse par Ollama...</p>
+                        <p style="color: #666; font-size: 14px;">Cela peut prendre quelques secondes</p>
+                    </div>
+                `;
+
+                // 2. Analyser avec Ollama
+                const response = await fetch('http://localhost:8000/api/analyze-cv', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        cv_text: text,
+                        model: "llama3.2"
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log("Données reçues:", data);
+
+                // 3. Afficher les résultats
+                displayResults(data, file.name);
+
+            } catch (error) {
+                console.error("Erreur:", error);
+                dropZone.innerHTML = `
+                    <div style="color: #ef4444;">
+                        <div class="icon">❌</div>
+                        <p style="font-weight: 600; margin-bottom: 8px;">Erreur lors de l'analyse</p>
+                        <p style="font-size: 14px;">${error.message}</p>
+                        <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer;">Réessayer</button>
+                    </div>
+                `;
+            }
+        }
+
+        function displayResults(data, filename) {
+            dropZone.innerHTML = `
+                <div style="color: #10b981;">
+                    <div class="icon">✅</div>
+                    <p style="font-weight: 600; margin-bottom: 8px;">Analyse terminée !</p>
+                    <p style="font-size: 14px; color: #666;">${filename}</p>
+                </div>
+            `;
+
+            resultContent.innerHTML = `
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Nom</h3>
+                        <p>${data.name || 'Non détecté'}</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Poste recherché</h3>
+                        <p>${data.role || 'Non détecté'}</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Localisation</h3>
+                        <p>${data.location || 'Non détectée'}</p>
+                    </div>
+                </div>
+                
+                ${data.skills && data.skills.length > 0 ? `
+                    <div style="margin-top: 20px;">
+                        <h3 style="margin-bottom: 12px; color: #333;">Compétences détectées</h3>
+                        <div class="skills-list">
+                            ${data.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+                
+                ${data.experience && data.experience.length > 0 ? `
+                    <div style="margin-top: 20px;">
+                        <h3 style="margin-bottom: 12px; color: #333;">Expériences</h3>
+                        <ul style="padding-left: 20px;">
+                            ${data.experience.map(exp => `<li style="margin-bottom: 8px;">${exp}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+                
+                ${data.education && data.education.length > 0 ? `
+                    <div style="margin-top: 20px;">
+                        <h3 style="margin-bottom: 12px; color: #333;">Formation</h3>
+                        <ul style="padding-left: 20px;">
+                            ${data.education.map(edu => `<li style="margin-bottom: 8px;">${edu}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+                
+                ${data.raw_response ? `
+                    <details style="margin-top: 20px;">
+                        <summary style="cursor: pointer; font-weight: 600; color: #667eea;">Voir la réponse brute d'Ollama</summary>
+                        <pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 10px; overflow-x: auto; font-size: 12px;">${data.raw_response}</pre>
+                    </details>
+                ` : ''}
+            `;
+
+            result.classList.add('show');
+        }
+    </script>
+</body>
+
+</html>

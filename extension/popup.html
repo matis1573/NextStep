@@ -4,43 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextStep Extension</title>
+    <title>NextStep AI</title>
     <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="popup-container">
-        <header>
-            <h1 class="brand">NextStep</h1>
-            <div class="status-dot"></div>
+
+    <!-- Fond animé abstrait -->
+    <div class="ambient-bg"></div>
+
+    <div class="app-wrapper">
+        <header class="mac-header">
+            <div class="logo">
+                <!-- Custom Sparkles SVG -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L14.39 9.61L22 12L14.39 14.39L12 22L9.61 14.39L2 12L9.61 9.61L12 2Z"
+                        fill="currentColor" />
+                    <path d="M19 18L20.2 21.8L24 23L20.2 24.2L19 28L17.8 24.2L14 23L17.8 21.8L19 18Z"
+                        fill="currentColor" transform="scale(0.5) translate(10, 10)" />
+                </svg>
+                NextStep AI
+            </div>
+            <div class="connection-status" id="ollama-status" title="Vérification Ollama...">
+                <div class="status-dot"></div>
+            </div>
         </header>
 
-        <main>
-            <div class="welcome-box">
-                <h2>Bonjour !</h2>
-                <p>Prêt pour votre prochaine étape ?</p>
+        <main class="content-area">
+
+            <!-- State 1: Idle -->
+            <div id="view-home" class="view-state active">
+                <div class="hero-section">
+                    <h2>Assistant Vision</h2>
+                    <p>Analysez n'importe quelle offre d'emploi instantanément avec l'IA.</p>
+                </div>
+
+                <button id="scan-btn" class="apple-btn primary">
+                    <span class="btn-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                    <span class="btn-text">Scanner cette page</span>
+                </button>
             </div>
 
-            <div class="scan-section">
-                <button class="btn-scan" id="scan-page">
-                    <i class="fa-solid fa-radar"></i>
-                    <span>Scanner cette page</span>
-                </button>
-                <div id="scan-results" class="scan-results hidden">
-                    <div class="analysis-loader">
-                        <div class="spinner"></div>
-                        <span>Analyse IA en cours...</span>
+            <!-- State 2: Analyzing -->
+            <div id="view-loading" class="view-state hidden">
+                <div class="loader-container">
+                    <div class="spinner-mac"></div>
+                    <div class="scramble-text" id="loading-text">Lecture de la page...</div>
+                </div>
+            </div>
+
+            <!-- State 3: Result -->
+            <div id="view-result" class="view-state hidden">
+                <div class="result-card">
+                    <div class="result-header">
+                        <span class="match-score">Match IA</span>
+                        <div class="score-badge" id="score-display">--%</div>
                     </div>
+                    <div class="result-body custom-scroll" id="analysis-content">
+                        <!-- Injcté par JS -->
+                    </div>
+                </div>
+                <button id="back-btn" class="apple-btn secondary small">
+                    <i class="fa-solid fa-arrow-left"></i> Retour
+                </button>
+            </div>
+
+            <!-- State 4: Error -->
+            <div id="view-error" class="view-state hidden">
+                <div class="error-container">
+                    <i class="fa-solid fa-circle-exclamation error-icon"></i>
+                    <h3>Oups</h3>
+                    <p id="error-msg">Impossible de contacter Ollama.</p>
+                    <button id="retry-btn" class="apple-btn secondary">Réessayer</button>
                 </div>
             </div>
 
         </main>
-
-        <footer>
-            <button class="btn-main">Ouvrir NextStep</button>
-        </footer>
     </div>
+
     <script src="popup.js"></script>
 </body>
 

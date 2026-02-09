@@ -18,6 +18,8 @@
     </script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="rome_database.js"></script>
+    <script src="ollama_integration_complete.js"></script>
+    <script src="france_travail_integration.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -193,7 +195,7 @@
             </div>
             <div class="feature-card full-width reveal reveal-delay-4">
                 <div class="stat-display">
-                    <span class="stat-value" data-target="12840">0</span>
+                    <span class="stat-value" data-target="985400">0</span>
                     <span class="stat-unit">Demandes d'alternance</span>
                 </div>
                 <div class="feature-info">
@@ -573,75 +575,7 @@
                 <div id="student-demo-map"
                     style="flex: 1; position: relative; overflow: hidden; border-radius: 0; margin-left: 0;">
 
-                    <!-- NextStep AI Trigger Button -->
-                    <button id="student-ai-trigger" class="ai-trigger-btn"
-                        style="position: absolute; bottom: 30px; right: 30px; z-index: 1001; background: white; color: black; border: none; padding: 12px 24px; border-radius: 50px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.3s ease;">
-                        <i class="fa-solid fa-robot"></i>
-                        NextStep AI
-                    </button>
 
-                    <!-- Student AI Chat Modal -->
-                    <div id="student-ai-modal" class="map-overlay hidden"
-                        style="z-index: 1002; display: flex; align-items: center; justify-content: center; backdrop-filter: none; transition: all 0.4s ease;">
-                        <div class="ai-chat-card-inner"
-                            style="width: 600px; height: 500px; background: rgba(18, 18, 18, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.5); transform: scale(0.9); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
-                            <!-- Header -->
-                            <div
-                                style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between;">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <div
-                                        style="width: 32px; height: 32px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black;">
-                                        <i class="fa-solid fa-robot" style="font-size: 14px;"></i>
-                                    </div>
-                                    <span style="font-weight: 600; color: white;">Assistant IA</span>
-                                </div>
-                                <button id="close-student-ai"
-                                    style="background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 18px;">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </button>
-                            </div>
-                            <!-- Chat Body -->
-                            <div id="student-ai-body"
-                                style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px;">
-                                <div class="bot-msg"
-                                    style="background: rgba(255,255,255,0.05); padding: 12px 16px; border-radius: 12px 12px 12px 0; color: white; align-self: flex-start; max-width: 85%; font-size: 14px; line-height: 1.5;">
-                                    Bonjour ! Je suis l'IA de NextStep. Comment puis-je t'aider dans ta recherche
-                                    d'alternance aujourd'hui ?
-                                </div>
-                            </div>
-                            <!-- Input Area -->
-                            <div
-                                style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); position: relative;">
-
-                                <div
-                                    style="display: flex; gap: 10px; background: rgba(255,255,255,0.03); padding: 5px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); align-items: center; position: relative;">
-
-                                    <!-- Mirror Backdrop for Highlighting -->
-                                    <div id="student-ai-backdrop"
-                                        style="position: absolute; top: 0; left: 0; right: 50px; bottom: 0; padding: 15px; font-size: 14px; color: transparent; pointer-events: none; white-space: pre; overflow: hidden; display: flex; align-items: center; font-family: inherit;">
-                                    </div>
-
-                                    <!-- Upload CV Button -->
-                                    <button id="btn-upload-cv" title="Analyser mon CV"
-                                        style="width: 32px; height: 32px; background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 8px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: background 0.3s;">
-                                        <i class="fa-solid fa-file-arrow-up" style="font-size: 14px;"></i>
-                                    </button>
-
-                                    <input type="file" id="cv-upload-input" accept=".pdf,.doc,.docx"
-                                        style="display: none;">
-
-                                    <input type="text" id="student-ai-input"
-                                        placeholder="Posez votre question... (@entreprise)"
-                                        style="flex: 1; background: transparent; border: none; color: white; padding: 10px; font-size: 14px; outline: none; position: relative; z-index: 1; caret-color: white;">
-
-                                    <button id="send-student-ai"
-                                        style="width: 40px; height: 40px; background: white; color: black; border: none; border-radius: 12px; cursor: pointer; flex-shrink: 0; position: relative; z-index: 2;">
-                                        <i class="fa-solid fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Location Permission Overlay -->
                     <div id="location-prompt-overlay" class="map-overlay" style="z-index: 100;">
@@ -736,57 +670,260 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- RIGHT SIDEBAR (Chatbot) -->
+                <div class="student-right-sidebar" data-lenis-prevent
+                    style="width: 380px; background-color: #121212; border-left: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 1; display: flex; flex-direction: column; overflow: hidden;">
+
+                    <!-- Chat Header -->
+                    <div
+                        style="padding: 1rem 0.8rem; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(20, 20, 20, 0.5);">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div
+                                style="width: 28px; height: 28px; background: #6366f1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0; font-size: 14px; font-weight: 600;">Assistant NextStep</h3>
+                                <span style="font-size: 10px; color: #10b981;">● En ligne</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div id="chat-messages"
+                        style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; scrollbar-width: none;">
+                        <div
+                            style="align-self: flex-start; background: rgba(255,255,255,0.05); padding: 12px 18px; border-radius: 12px; border-bottom-left-radius: 2px; max-width: 85%; font-size: 13px; color: #e2e8f0; line-height: 1.5;">
+                            Bonjour ! Je suis votre assistant carrière. Cliquez sur une offre pour que je puisse
+                            l'analyser avec vous ! 🚀
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div
+                        style="padding: 15px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(15, 15, 15, 0.8);">
+                        <div style="position: relative; display: flex; gap: 8px;">
+                            <textarea id="chat-input" placeholder="Posez une question..." rows="1"
+                                style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 15px; color: white; resize: none; font-family: inherit; font-size: 13px; outline: none; transition: border-color 0.2s;"></textarea>
+                            <button id="chat-send-btn"
+                                style="width: 42px; height: 42px; background: #6366f1; border: none; border-radius: 12px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.1s;">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    </div>
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="toast-notification">
-        <div class="toast-icon">
-            <i class="fa-solid fa-check"></i>
-        </div>
-        <div class="toast-text">
-            <h4>Analyse terminée</h4>
-            <p id="toast-message">3 opportunités trouvées à Marseille.</p>
-        </div>
-    </div>
-
-    <!-- AI Assistant Orb -->
-    <div class="ai-assistant-orb" id="ai-assistant-trigger">
-        <div class="orb-container">
-            <div class="orb-visual"></div>
-            <div class="orb-waves">
-                <span></span>
-                <span></span>
-                <span></span>
+        <!-- Toast Notification Container -->
+        <div id="toast-container" class="toast-notification">
+            <div class="toast-icon">
+                <i class="fa-solid fa-check"></i>
             </div>
-            <div class="orb-glow"></div>
-        </div>
-        <div class="orb-tooltip">Assistant IA</div>
-    </div>
-
-    <!-- AI Chat Popup -->
-    <div class="ai-chat-popup" id="ai-chat-popup">
-        <div class="chat-header">
-            <div class="chat-status"></div>
-            <span>Assistant NextStep</span>
-            <button class="close-chat" id="close-ai-chat">&times;</button>
-        </div>
-        <div class="chat-body" id="ai-chat-body">
-            <div class="chat-message bot">
-                Bonjour ! Je suis l'assistant NextStep. Comment puis-je vous aider aujourd'hui ?
+            <div class="toast-text">
+                <h4>Analyse terminée</h4>
+                <p id="toast-message">3 opportunités trouvées à Marseille.</p>
             </div>
         </div>
-        <div class="chat-footer" style="display: none;">
-            <!-- Input removed for chip-only interaction -->
-        </div>
-    </div>
 
-    <!-- Dashboard has been moved to dashboard.html -->
-    <script src="schools_db.js"></script>
-    <script src="script.js"></script>
+        <!-- AI elements removed -->
+
+        <!-- CV Analysis Results Popup -->
+        <div id="cv-analysis-popup" class="cv-analysis-modal hidden">
+            <div class="cv-analysis-overlay"></div>
+            <div class="cv-analysis-card">
+                <button class="cv-analysis-close" id="close-cv-analysis">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div id="cv-analysis-content">
+                    <!-- Content will be injected by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Dashboard has been moved to dashboard.html -->
+        <script src="schools_db.js"></script>
+        <!-- AI Match Popup Logic -->
+        <script src="ai_match_popup.js"></script>
+        <script src="script.js"></script>
+
+        <!-- FORCE CHAT LISTENERS (Capture Phase) -->
+        <!-- SELF-CONTAINED CHATBOT LOGIC -->
+        <script>
+            console.log("🚀 Chatbot Logic Initializing...");
+            let activeOfferCtx = null;
+            let chatHistory = []; // Conversation memory
+
+            // Inject styles for mentions
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .mention {
+                    color: #818cf8;
+                    background: rgba(99, 102, 241, 0.15);
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+                .mention:hover {
+                    background: rgba(99, 102, 241, 0.3);
+                    text-decoration: underline;
+                }
+            `;
+            document.head.appendChild(style);
+
+            function formatMentions(text) {
+                // Regex to find @Name (simple word boundary)
+                return text.replace(/@(\w+)/g, '<span class="mention">@$1</span>');
+            }
+
+            function addAiChatMessage(role, text) {
+                const aiChatMessages = document.getElementById('chat-messages');
+                if (!aiChatMessages) return;
+
+                const msg = document.createElement('div');
+                const isAssistant = role === 'assistant';
+
+                msg.style.alignSelf = isAssistant ? 'flex-start' : 'flex-end';
+                msg.style.background = isAssistant ? 'rgba(255,255,255,0.05)' : '#6366f1';
+                msg.style.padding = '12px 18px';
+                msg.style.borderRadius = '12px';
+                if (isAssistant) msg.style.borderBottomLeftRadius = '2px';
+                else msg.style.borderBottomRightRadius = '2px';
+                msg.style.maxWidth = '85%';
+                msg.style.fontSize = '14px';
+                msg.style.color = isAssistant ? '#e2e8f0' : 'white';
+                msg.style.lineHeight = '1.5';
+
+                // Format mentions
+                msg.innerHTML = formatMentions(text);
+
+                aiChatMessages.appendChild(msg);
+                aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+                chatHistory.push({ role: role, content: text });
+                if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
+            }
+
+            window.sendAiChatMessage = async function () {
+                const aiChatInput = document.getElementById('chat-input');
+                const aiChatSendBtn = document.getElementById('chat-send-btn');
+
+                if (!aiChatInput) return;
+                const text = aiChatInput.value.trim();
+
+                console.log("Sending message:", text); // Debug log
+                if (!text) return;
+
+                addAiChatMessage('user', text);
+                aiChatInput.value = '';
+                aiChatInput.disabled = true;
+
+                // 1. Build Base Context (Offer + CV)
+                let contextPrompt = "";
+                if (activeOfferCtx) {
+                    contextPrompt += `[OFFRE ACTUELLE: Entreprise=${activeOfferCtx.company}, Poste=${activeOfferCtx.role}] `;
+                    if (activeOfferCtx.desc) contextPrompt += `[DESC: ${activeOfferCtx.desc}] `;
+                    if (activeOfferCtx.req) contextPrompt += `[REQUIS: ${activeOfferCtx.req}] `;
+                }
+
+                if (window.userCVContent) {
+                    contextPrompt += ` [CV DU CANDIDAT: ${window.userCVContent.substring(0, 3000)}...] `;
+                }
+
+                // 2. Handle Mentions (@Company) and Intentions
+                const mentionMatch = text.match(/@(\w+)/);
+                if (mentionMatch) {
+                    const companyName = mentionMatch[1];
+                    console.log("Mention detected:", companyName);
+
+                    // Lookup
+                    if (window.studentOffersData) {
+                        const found = window.studentOffersData.find(o => o.company.toLowerCase().includes(companyName.toLowerCase()));
+                        if (found) {
+                            // INJECT RICH CONTEXT
+                            contextPrompt += ` [FOCUS CIBLÉ SUR @${found.company.toUpperCase()}: 
+                             - Description: ${found.desc || "Non spécifiée"}
+                             - Pré-requis: ${found.req || "Non spécifiés"}
+                             - Ville: ${found.city || "Non spécifiée"}] `;
+                        }
+                    }
+
+                    // Detect Intentions
+                    const lowerText = text.toLowerCase();
+                    if (lowerText.includes("parle moi") || lowerText.includes("c'est quoi") || lowerText.includes("détails")) {
+                        contextPrompt += " [ACTION: Présente l'entreprise de manière attractive. Utilise la description fournie.] ";
+                    }
+                    else if (lowerText.includes("avantage") || lowerText.includes("mon cv") || lowerText.includes("pourquoi moi") || lowerText.includes("chances")) {
+                        contextPrompt += " [ACTION CRITIQUE: Analyse le CV par rapport aux PRE-REQUIS de cette offre. Liste les points de compatibilité (Hard & Soft Skills). Sois un coach stratégique.] ";
+                    }
+                }
+
+                // 3. Prepare Payload with History
+                const conversationPayload = chatHistory.slice(0, -1);
+                conversationPayload.push({ role: "user", content: contextPrompt + "\n\nMessage utilisateur: " + text });
+
+                const systemMsg = {
+                    role: "system",
+                    content: "Tu es l'Expert Carrière NextStep. TA MISSION : Coacher l'étudiant vers l'alternance. \n- Si on te demande de présenter une entreprise : Sois complet, valorisant et précis.\n- Si on te demande 'mes avantages' ou une analyse : Croise les données du CV avec l'offre. Donne des arguments concrets.\n- Ton ton est professionnel, encourageant et expert."
+                };
+
+                try {
+                    const resp = await fetch('http://localhost:8000/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: "llama3.2",
+                            messages: [systemMsg, ...conversationPayload],
+                            stream: false
+                        })
+                    });
+                    const data = await resp.json();
+                    addAiChatMessage('assistant', data.choices ? data.choices[0].message.content : "Réponse invalide du backend.");
+                } catch (e) {
+                    console.error("Chat Error:", e);
+                    addAiChatMessage('assistant', "Erreur de connexion au serveur IA.");
+                } finally {
+                    aiChatInput.disabled = false;
+                    aiChatInput.focus();
+                }
+            };
+
+            // Global context updater
+            window.updateChatbotContext = function (offer) {
+                activeOfferCtx = offer;
+                const aiChatMessages = document.getElementById('chat-messages');
+                if (aiChatMessages) {
+                    aiChatMessages.innerHTML = '';
+                    addAiChatMessage('assistant', `Bonjour ! Parlons de l'offre chez <strong>${offer.company}</strong>.`);
+                }
+            };
+
+            // Event Listeners (Capture Phase)
+            document.addEventListener('keydown', function (e) {
+                if (e.target.id === 'chat-input' && e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    window.sendAiChatMessage();
+                    return false;
+                }
+            }, true);
+
+            document.addEventListener('click', function (e) {
+                if (e.target.closest('#chat-send-btn')) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    window.sendAiChatMessage();
+                    return false;
+                }
+            }, true);
+        </script>
 </body>
 
 </html>
