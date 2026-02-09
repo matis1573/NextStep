@@ -1,111 +1,100 @@
 <div align="center">
-  <img src="public/assets/banner.png" alt="NextStep Banner" width="100%" style="border-radius: 10px; margin-bottom: 20px;">
+  <img width="100%" alt="NextStep Banner" src="https://github.com/user-attachments/assets/882498cc-3811-4d78-bfb9-507e780806a4" style="border-radius: 12px; margin-bottom: 30px;">
 
-  <h1 align="center">NextStep AI</h1>
+  <h1 align="center" style="font-size: 3rem; font-weight: 900;">NextStep AI</h1>
   
-  <p align="center">
-    <strong>L'Orientation Professionnelle Réinventée par l'Intelligence Artificielle Locale</strong>
+  <p align="center" style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+    <strong>L'alliance de la Cartographie Immersive et de l'IA Locale pour révolutionner votre recherche d'alternance.</strong>
   </p>
 
+  <br>
 
   <p align="center">
-    <a href="#-fonctionnalités">Fonctionnalités</a> •
-    <a href="#-installation">Installation</a> •
-    <a href="#-technologies">Technologies</a> •
-    <a href="#-architecture">Architecture</a>
-  </p>
-
-  <p align="center">
-    <img src="https://img.shields.io/badge/Python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
-    <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI">
-    <img src="https://img.shields.io/badge/Ollama-Local_AI-000000?style=flat-square&logo=ollama&logoColor=white" alt="Ollama">
-    <img src="https://img.shields.io/badge/France_Travail-Official_API-000091?style=flat-square&logo=france&logoColor=white" alt="France Travail">
-    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
+    <img src="https://img.shields.io/badge/Privacy-100%25_Local-000000?style=for-the-badge&logo=privacy&logoColor=white" alt="Privacy First">
+    <img src="https://img.shields.io/badge/Data-France_Travail-000091?style=for-the-badge&logo=france&logoColor=white" alt="Official Data">
+    <img src="https://img.shields.io/badge/AI-Llama_3.2-blue?style=for-the-badge&logo=ollama&logoColor=white" alt="Llama 3.2">
   </p>
 </div>
 
+<br>
+<br>
+
+## 🔮 La Vision NextStep
+
+Trouver une alternance ne devrait pas être une succession de tableaux Excel et de candidatures aveugles. **NextStep** est né d'un constat simple : les étudiants manquent de visibilité locale et d'accompagnement personnalisé.
+
+Nous avons créé une plateforme qui agit comme un **Mentor Augmenté**. Elle ne se contente pas de lister des offres ; elle les géolocalise, les analyse, et vous explique *pourquoi* elles sont faites pour vous.
+
 ---
 
-## 💡 Présentation
+## ⚙️ Comment ça marche ?
 
-**NextStep** est une plateforme de nouvelle génération qui connecte les étudiants aux opportunités d'alternance grâce à une synergie unique entre **l'Intelligence Artificielle Locale (Privacy-First)** et les **Données Officielles de l'État**.
+L'expérience NextStep repose sur trois piliers technologiques interconnectés :
 
-Fini les recherches fastidieuses. NextStep agit comme un **Mentor IA Personnel** qui analyse votre CV, comprend vos compétences, et les matche en temps réel avec le marché du travail local.
+### 1. 🗺️ Exploration Immersive (The Pathfinder)
+Au lieu d'une liste textuelle, nous plongeons l'utilisateur dans une **carte interactive 3D**.
+*   **Visualisation Temps Réel** : Les offres issues de l'API France Travail apparaissent autour de vous.
+*   **Contexte Hyper-Local** : Vous voyez immédiatement la distance, le temps de trajet et l'écosystème d'entreprises de votre ville.
+
+### 2. 🧠 Intelligence Artificielle Locale (Le Coach)
+C'est le cœur du système. Contrairement aux chatbots classiques, notre IA (propulsée par **Ollama** et **Llama 3.2**) :
+*   **Connaît le marché** : Elle a accès aux descriptions détaillées des entreprises.
+*   **Respecte votre vie privée** : Tout le raisonnement se fait en local. Aucune donnée personnelle ne part chez OpenAI ou Google.
+*   **Dialogue Naturel** : Posez des questions comme *"C'est quoi l'ambiance chez eux ?"* ou *"Quelles technos ils utilisent ?"*.
+
+### 3. 🎯 Matching de Précision (Gap Analysis)
+C'est notre fonctionnalité phare.
+1.  Vous glissez votre **CV (PDF)**.
+2.  L'IA analyse vos compétences (Hard & Soft Skills).
+3.  Elle les croise avec les pré-requis de l'offre sélectionnée.
+4.  **Résultat** : Elle vous donne un score de compatibilité et des arguments concrets pour votre lettre de motivation.
 
 ---
 
-## ✨ Fonctionnalités
+## ✨ Fonctionnalités Clés
 
-| Fonctionnalité | Description |
+| Fonctionnalité | Ce qu'elle apporte |
 | :--- | :--- |
-| **🗺️ Pathfinder** | Une carte interactive immersive affichant les offres d'alternance autour de vous (< 20km) en temps réel, basées sur l'API France Travail. |
-| **🤖 Coach IA Expert** | Un assistant conversationnel propulsé par **Llama 3.2** qui répond à vos questions, détaille les entreprises et vous coach pour les entretiens. |
-| **🧠 Gap Analysis** | L'IA croise votre CV (PDF) avec les pré-requis de chaque offre pour identifier vos points forts (Hard/Soft Skills) et maximiser vos chances. |
-| **🛡️ 100% Local Privacy** | **Aucune donnée personnelle n'est envoyée aux GAFAM.** Tout le traitement IA se fait en local via Ollama. Vos données restent chez vous. |
-| **📄 Analyse Semantique** | Extraction et compréhension automatique du CV pour un matching précis avec les codes ROME (Répertoire Opérationnel des Métiers). |
+| **📍 Géolocalisation Live** | Agrégation en temps réel des offres officielles (France Travail) dans un rayon de 20km. |
+| **🛡️ Privacy By Design** | Architecture souveraine. Le traitement IA est effectué sur votre machine ou serveur privé. |
+| **📄 Analyse Sémantique** | Parsing avancé de CV pour extraire l'essence de votre profil (et pas juste des mots-clés). |
+| **💬 Chat Contextuel** | L'IA "lit" l'offre en même temps que vous et répond à des questions spécifiques sur le poste. |
 
 ---
 
-## 🛠️ Technologies
+## 🏗️ Architecture Technique
+
+NextStep est conçu pour la performance et la confidentialité.
+
+```mermaid
+graph LR
+    User[Étudiant] -->|Interface Web| Frontend[Frontend (MapLibre + JS)]
+    Frontend -->|Analyse CV| Backend[Backend Python (FastAPI)]
+    Frontend -->|Chat| Backend
+    Backend -->|Inférence| AI[Ollama (Llama 3.2 Local)]
+    Backend -->|Recherche Offres| API[API France Travail]
+    AI -->|Conseils & Matching| Backend
+    API -->|Données Verifiées| Backend
+    Backend -->|Expérience Unifiée| Frontend
+```
+
+---
+
+## 🛠️ Stack Technologique
 
 <div align="center">
 
-| Composant | Technologie | Rôle |
-| :--- | :--- | :--- |
-| **Backend** | ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi) | API Gateway, Proxy France Travail, Gestion Ollama |
-| **IA Engine** | ![Ollama](https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama) | Moteur d'inférence local (Llama 3.2 / Mistral) |
-| **Frontend** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | Interface fluide, MapLibre, PDF.js |
-| **Data** | ![FranceTravail](https://img.shields.io/badge/API_Gouv-000091?style=flat-square) | Source de vérité pour les offres d'emploi |
+| Domaine | Technologies |
+| :--- | :--- |
+| **Intelligence Artificielle** | ![Ollama](https://img.shields.io/badge/-Ollama-000?style=flat-square&logo=ollama) ![Llama](https://img.shields.io/badge/-Llama_3.2-blue?style=flat-square) |
+| **Backend API** | ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white) ![FastAPI](https://img.shields.io/badge/-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white) |
+| **Frontend** | ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![MapLibre](https://img.shields.io/badge/-MapLibre-purple?style=flat-square) |
+| **Données** | ![FranceTravail](https://img.shields.io/badge/-Data_Gouv-000091?style=flat-square&logo=france&logoColor=white) |
 
 </div>
 
----
-
-## 🚀 Installation
-
-### Pré-requis
-*   **Python 3.8+**
-*   **[Ollama](https://ollama.ai/)** installé et actif.
-*   Modèle téléchargé : `ollama pull llama3.2`
-
-### 1. Cloner et Installer le Backend
-Le cerveau de l'application (API Python).
-
-```bash
-cd backend
-pip install -r requirements.txt
-# Lancer le serveur API (Port 8000)
-uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
-```
-
-### 2. Lancer le Frontend
-L'interface utilisateur (Serveur Web).
-
-```bash
-cd public
-# Lancer le serveur Web (Port 8080)
-python3 -m http.server 8080
-```
-
-### 3. Accéder à l'application
-Ouvrez simplement votre navigateur :
-> **http://localhost:8080**
-
----
-
-## 📂 Structure du Projet
-
-```mermaid
-graph TD
-    A[Public/ Frontend] -->|HTTP Requests| B[Backend API :8000]
-    B -->|Inference| C[Ollama Local :11434]
-    B -->|Fetch Offers| D[API France Travail]
-    C -->|Response| B
-    D -->|JSON Data| B
-    B -->|JSON Response| A
-```
-
----
+<br>
+<br>
 
 <div align="center">
   <p>© 2026 NextStep AI - Tous droits réservés.</p>
