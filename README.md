@@ -1,103 +1,110 @@
-# 🚀 NextStep : L'Orientation Propulsée par l'IA Locale
+<div align="center">
+  <h1 align="center">NextStep AI</h1>
+  
+  <p align="center">
+    <strong>L'Orientation Professionnelle Réinventée par l'Intelligence Artificielle Locale</strong>
+  </p>
 
-> **La première plateforme de recherche d'alternance qui combine Intelligence Artificielle Locale, Données Officielles (France Travail) et Géolocalisation.**
+  <p align="center">
+    <a href="#-fonctionnalités">Fonctionnalités</a> •
+    <a href="#-installation">Installation</a> •
+    <a href="#-technologies">Technologies</a> •
+    <a href="#-architecture">Architecture</a>
+  </p>
 
----
-
-## 🧐 La Problématique
-
-Pour un étudiant aujourd'hui, trouver une alternance est un parcours du combattant :
-*   **Offres dispersées** : Il faut naviguer sur des dizaines de sites.
-*   **Descriptions cryptiques** : Les offres d'emploi sont souvent génériques et difficiles à décrypter pour un junior.
-*   **Manque de feedback** : "Est-ce que mon CV correspond vraiment ?" L'étudiant envoie des centaines de candidatures sans savoir s'il a ses chances.
-*   **Déshumanisation** : Les plateformes classiques sont des moteurs de recherche froids sans accompagnement.
-
-## 💡 Notre Solution
-
-**NextStep** réinvente cette expérience en plaçant l'IA au service de l'étudiant, tout en garantissant la souveraineté des données.
-
-Nous avons créé un **compagnon de carrière intelligent** qui :
-1.  **Comprend le candidat** en analysant son CV en profondeur.
-2.  **Comprend le marché** en se connectant en temps réel aux offres officielles du Gouvernement (API France Travail).
-3.  **Matche les deux** grâce à un moteur d'IA générative local (Llama 3.2 via Ollama) qui explique *pourquoi* une offre est intéressante.
-
----
-
-## ✨ Fonctionnalités Principales
-
-### 1. 🗺️ Pathfinder : La Carte Interactive
-Fini les listes interminables. NextStep affiche les opportunités **autour de l'étudiant** (rayon configurable, par défaut < 20km).
-*   Visualisation immédiate de la densité des offres.
-*   Filtrage intelligent par domaine et type de contrat.
-*   Données réelles issues de l'API France Travail.
-
-### 2. 🤖 Coach Carrière Expert (IA Locale)
-Notre Chatbot n'est pas un simple script. C'est une **IA contextuelle** (Llama 3.2) capable de :
-*   **Contextualisation** : Il sait quelle entreprise vous regardez. Dites *"Parle-moi de cette boîte"* et il vous fera une présentation détaillée basée sur les données réelles (secteur, description).
-*   **Gap Analysis** : Dites *"Quels sont mes avantages ?"*. L'IA croise **votre CV** (compétences, expériences) avec les **pré-requis** de l'offre pour vous donner des arguments de vente concrets (Hard & Soft Skills).
-
-### 3. 📄 Analyseur de CV Intelligent
-L'utilisateur peut déposer son CV (PDF).
-*   Extraction du texte via `pdf.js`.
-*   Analyse sémantique pour détecter les compétences clés.
-*   Conversion automatique vers les codes ROME (Répertoire Opérationnel des Métiers et des Emplois) pour interroger l'API France Travail avec précision.
-
-### 4. 🛡️ Privacy First (100% Local / Open Source)
-Contrairement aux autres plateformes, **aucune donnée personnelle n'est envoyée à OpenAI ou Google**.
-*   Le moteur d'IA (Ollama) tourne **localement** sur la machine ou le serveur.
-*   Les appels API externes se font uniquement vers les services de l'État (France Travail).
+  <p align="center">
+    <img src="https://img.shields.io/badge/Python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+    <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI">
+    <img src="https://img.shields.io/badge/Ollama-Local_AI-000000?style=flat-square&logo=ollama&logoColor=white" alt="Ollama">
+    <img src="https://img.shields.io/badge/France_Travail-Official_API-000091?style=flat-square&logo=france&logoColor=white" alt="France Travail">
+    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
+  </p>
+</div>
 
 ---
 
-## 🛠️ Stack Technique
+## 💡 Présentation
 
-Le projet est conçu avec une architecture moderne et découplée :
+**NextStep** est une plateforme de nouvelle génération qui connecte les étudiants aux opportunités d'alternance grâce à une synergie unique entre **l'Intelligence Artificielle Locale (Privacy-First)** et les **Données Officielles de l'État**.
 
-*   **Frontend** : HTML5, CSS3 (Design System Premium), JavaScript Vanilla (Performance maximale).
-*   **Backend** : Python **FastAPI** (API REST performante et asynchrone).
-*   **Intelligence Artificielle** : 
-    *   **Ollama** : Moteur d'inférence local.
-    *   **Llama 3.2** : Le modèle de langage utilisé pour le raisonnement.
-*   **Données** : API France Travail (Offres réelles).
+Fini les recherches fastidieuses. NextStep agit comme un **Mentor IA Personnel** qui analyse votre CV, comprend vos compétences, et les matche en temps réel avec le marché du travail local.
 
 ---
 
-## 🚀 Installation et Lancement
+## ✨ Fonctionnalités
 
-Pour faire tourner NextStep sur votre machine :
+| Fonctionnalité | Description |
+| :--- | :--- |
+| **🗺️ Pathfinder** | Une carte interactive immersive affichant les offres d'alternance autour de vous (< 20km) en temps réel, basées sur l'API France Travail. |
+| **🤖 Coach IA Expert** | Un assistant conversationnel propulsé par **Llama 3.2** qui répond à vos questions, détaille les entreprises et vous coach pour les entretiens. |
+| **🧠 Gap Analysis** | L'IA croise votre CV (PDF) avec les pré-requis de chaque offre pour identifier vos points forts (Hard/Soft Skills) et maximiser vos chances. |
+| **🛡️ 100% Local Privacy** | **Aucune donnée personnelle n'est envoyée aux GAFAM.** Tout le traitement IA se fait en local via Ollama. Vos données restent chez vous. |
+| **📄 Analyse Semantique** | Extraction et compréhension automatique du CV pour un matching précis avec les codes ROME (Répertoire Opérationnel des Métiers). |
+
+---
+
+## 🛠️ Technologies
+
+<div align="center">
+
+| Composant | Technologie | Rôle |
+| :--- | :--- | :--- |
+| **Backend** | ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi) | API Gateway, Proxy France Travail, Gestion Ollama |
+| **IA Engine** | ![Ollama](https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama) | Moteur d'inférence local (Llama 3.2 / Mistral) |
+| **Frontend** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | Interface fluide, MapLibre, PDF.js |
+| **Data** | ![FranceTravail](https://img.shields.io/badge/API_Gouv-000091?style=flat-square) | Source de vérité pour les offres d'emploi |
+
+</div>
+
+---
+
+## 🚀 Installation
 
 ### Pré-requis
-1.  Avoir **Python 3.8+** installé.
-2.  Avoir **Ollama** installé et le modèle `llama3.2` téléchargé (`ollama pull llama3.2`).
+*   **Python 3.8+**
+*   **[Ollama](https://ollama.ai/)** installé et actif.
+*   Modèle téléchargé : `ollama pull llama3.2`
 
-### 1. Lancer le Backend (Cerveau IA & Proxy)
-Ce service gère la communication avec Ollama et fait le pont sécurisé avec France Travail.
+### 1. Cloner et Installer le Backend
+Le cerveau de l'application (API Python).
 
 ```bash
 cd backend
-# (Optionnel) Créer un venv : python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
+# Lancer le serveur API (Port 8000)
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-### 2. Lancer le Frontend (Interface Web)
-Dans un nouveau terminal :
+### 2. Lancer le Frontend
+L'interface utilisateur (Serveur Web).
 
 ```bash
 cd public
+# Lancer le serveur Web (Port 8080)
 python3 -m http.server 8080
 ```
 
-### 3. Accès
-Ouvrez votre navigateur sur : **[http://localhost:8080](http://localhost:8080)**
+### 3. Accéder à l'application
+Ouvrez simplement votre navigateur :
+> **http://localhost:8080**
 
 ---
 
-## 🔮 Roadmap
+## 📂 Structure du Projet
 
-*   [ ] Intégration de l'authentification OAuth.
-*   [ ] Version mobile (PWA).
-*   [ ] Génération automatique de lettre de motivation par l'IA.
+```mermaid
+graph TD
+    A[Public/ Frontend] -->|HTTP Requests| B[Backend API :8000]
+    B -->|Inference| C[Ollama Local :11434]
+    B -->|Fetch Offers| D[API France Travail]
+    C -->|Response| B
+    D -->|JSON Data| B
+    B -->|JSON Response| A
+```
 
 ---
-*Développé avec ❤️ pour NextStep.*
+
+<div align="center">
+  <p>Fait avec ❤️ pour le Hackathon NextStep</p>
+  <p>© 2026 NextStep AI - Tous droits réservés.</p>
+</div>
