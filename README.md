@@ -19,50 +19,53 @@
 <br>
 <br>
 
-## La Vision NextStep
+## 🔮 La Vision NextStep
 
-Trouver une alternance ne devrait pas être une succession de tableaux Excel et de candidatures aveugles. **NextStep** est né d'un constat simple : les étudiants manquent de visibilité locale et d'accompagnement personnalisé.
+Dans un marché du travail saturé d'informations, les étudiants se sentent souvent perdus. **NextStep** est né d'une ambition : redonner le pouvoir aux candidats grâce à la technologie.
 
-Nous avons créé une plateforme qui agit comme un **Mentor Augmenté**. Elle ne se contente pas de lister des offres ; elle les géolocalise, les analyse, et vous explique *pourquoi* elles sont faites pour vous.
-
----
-
-## Comment ça marche ?
-
-L'expérience NextStep repose sur trois piliers technologiques interconnectés :
-
-### 1. Exploration Immersive (The Pathfinder)
-Au lieu d'une liste textuelle, nous plongeons l'utilisateur dans une **carte interactive 3D**.
-*   **Visualisation Temps Réel** : Les offres issues de l'API France Travail apparaissent autour de vous.
-*   **Contexte Hyper-Local** : Vous voyez immédiatement la distance, le temps de trajet et l'écosystème d'entreprises de votre ville.
-
-### 2. Intelligence Artificielle Locale (Le Coach)
-C'est le cœur du système. Contrairement aux chatbots classiques, notre IA (propulsée par **Ollama** et **Llama 3.2**) :
-*   **Connaît le marché** : Elle a accès aux descriptions détaillées des entreprises.
-*   **Respecte votre vie privée** : Tout le raisonnement se fait en local. Aucune donnée personnelle ne part chez OpenAI ou Google.
-*   **Dialogue Naturel** : Posez des questions comme *"C'est quoi l'ambiance chez eux ?"* ou *"Quelles technos ils utilisent ?"*.
-
-### 3. Matching de Précision (Gap Analysis)
-C'est notre fonctionnalité phare.
-1.  Vous glissez votre **CV (PDF)**.
-2.  L'IA analyse vos compétences (Hard & Soft Skills).
-3.  Elle les croise avec les pré-requis de l'offre sélectionnée.
-4.  **Résultat** : Elle vous donne un score de compatibilité et des arguments concrets pour votre lettre de motivation.
+Nous avons conçu une plateforme qui ne se contente pas d'agréger des données, mais qui **comprend** le contexte. En fusionnant la géolocalisation précise et l'analyse sémantique par IA, nous transformons une liste d'offres froide en un plan de carrière personnalisé et actionnable.
 
 ---
 
-## Fonctionnalités Clés
+## ⚙️ Comment ça marche ?
 
-| Fonctionnalité | Ce qu'elle apporte |
+L'expérience utilisateur a été repensée autour de trois piliers technologiques majeurs :
+
+### 1. 🗺️ Exploration Immersive (The Pathfinder)
+L'interface classique "liste déroulante" est obsolète. NextStep propose une **navigation spatiale** :
+*   **Cartographie 3D** : Visualisez les opportunités dans votre écosystème local.
+*   **Données Temps Réel** : Connexion directe à l'API France Travail pour garantir la fraîcheur des offres.
+*   **Filtres Intelligents** : L'affichage s'adapte dynamiquement à votre profil.
+
+### 2. 🧠 Intelligence Artificielle Locale (Le Coach)
+C'est le cerveau de notre application. Nous utilisons **Llama 3.2** via Ollama pour offrir une assistance de niveau expert :
+*   **Compréhension Contextuelle** : L'IA analyse la fiche de poste en temps réel pendant que vous la consultez.
+*   **Souveraineté des Données** : Contrairement aux solutions cloud, notre IA tourne **localement**. Vos données personnelles et votre CV ne quittent jamais votre infrastructure.
+*   **Dialogue Mentorat** : Préparez vos entretiens avec un coach virtuel qui connaît les attentes spécifiques de l'entreprise cible.
+
+### 3. 🎯 Gap Analysis & Matching
+Notre algorithme de matching dépasse la simple recherche de mots-clés :
+1.  **Ingestion** : Vous déposez votre CV (PDF).
+2.  **Extraction** : Le système structure vos expériences et compétences clés.
+3.  **Comparaison Vectorielle** : Il évalue la compatibilité avec les pré-requis de l'offre.
+4.  **Recommandation** : Vous recevez un score de match et des conseils stratégiques pour combler les écarts ("Gap Analysis").
+
+---
+
+## ✨ Fonctionnalités Clés
+
+| Fonctionnalité | Description & Impact |
 | :--- | :--- |
-| **Géolocalisation Live** | Agrégation en temps réel des offres officielles (France Travail) dans un rayon de 20km. |
-| **Privacy By Design** | Architecture souveraine. Le traitement IA est effectué sur votre machine ou serveur privé. |
-| **Analyse Sémantique** | Parsing avancé de CV pour extraire l'essence de votre profil (et pas juste des mots-clés). |
-| **Chat Contextuel** | L'IA "lit" l'offre en même temps que vous et répond à des questions spécifiques sur le poste. |
+| **📍 Géolocalisation Live** | Agrégation en temps réel des offres officielles (France Travail) dans un rayon configurable (défaut : 20km). Permet de cibler le marché caché local. |
+| **🛡️ Privacy By Design** | Architecture souveraine. Le traitement IA est effectué "On-Device" ou sur serveur privé. Zéro fuite de données vers les GAFAM. |
+| **📄 Analyse Sémantique** | Parsing avancé de CV pour extraire l'essence du profil candidat, bien au-delà des simples titres de poste. |
+| **💬 Chat Contextuel** | Une interface conversationnelle qui "lit" l'offre à vos côtés et peut répondre à des questions pointues : *"Quelles sont les compétences critiques pour ce poste ?"*. |
 
 ---
 
-## Stack Technologique
+## 🛠️ Stack Technologique
+
+Une architecture moderne, performante et découplée pour une scalabilité maximale.
 
 <div align="center">
 
@@ -74,6 +77,14 @@ C'est notre fonctionnalité phare.
 | **Données** | ![FranceTravail](https://img.shields.io/badge/-Data_Gouv-000091?style=flat-square&logo=france&logoColor=white) |
 
 </div>
+
+---
+
+## 🚀 Roadmap
+
+*   **Q3 2026** : Application Mobile (iOS/Android).
+*   **Q4 2026** : Intégration des offres de formation (Parcoursup/MonCompteFormation).
+*   **2027** : Module de simulation d'entretien vocal avec avatars réalistes.
 
 <br>
 <br>
