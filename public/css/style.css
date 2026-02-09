@@ -167,7 +167,7 @@ body::-webkit-scrollbar {
 .cursor-visual {
     width: 40px;
     height: 40px;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M29.6 2.1L2.1 14.1C1.2 14.5 1.5 16 2.6 16.5L11.6 21L16 30C16.5 31 18 31.4 18.4 30.4L30.5 2.9C30.8 2.2 30.3 1.8 29.6 2.1Z' fill='%233B82F6'/%3E%3Cpath d='M29.6 2.1L12.6 18.8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url('../assets/arrow.cur');
     background-size: contain;
     background-repeat: no-repeat;
     transform-origin: 0 0;
