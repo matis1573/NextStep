@@ -42,7 +42,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none !important;
+    cursor: auto !important;
 }
 
 .hidden {
@@ -55,7 +55,7 @@ html {
     /* Firefox */
     -ms-overflow-style: none;
     /* IE and Edge */
-    cursor: none !important;
+    cursor: auto !important;
 }
 
 html.lenis {
@@ -86,7 +86,7 @@ html::-webkit-scrollbar {
 body {
     scrollbar-width: none;
     -ms-overflow-style: none;
-    cursor: none !important;
+    cursor: auto !important;
 }
 
 body::-webkit-scrollbar {
@@ -142,7 +142,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
-    cursor: none;
+    cursor: auto;
     padding: 6rem 0;
     /* Adjusted padding now that hero is gone */
 }
@@ -151,56 +151,8 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-.custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none !important;
-    /* Forces inputs to go through */
-    z-index: 2147483647;
-    /* Maximum Safe Integer for CSS z-index */
-    will-change: transform;
-    mix-blend-mode: normal;
-    /* Ensure it renders on top */
-}
 
-.cursor-visual {
-    width: 40px;
-    height: 40px;
-    background-image: url('../assets/arrow.cur');
-    background-size: contain;
-    background-repeat: no-repeat;
-    transform-origin: 0 0;
-    transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
-}
 
-.custom-cursor.clicking .cursor-visual {
-    transform: scale(0.8);
-}
-
-.cursor-label {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: #3b82f6;
-    /* Default Blue */
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    transform: scale(0.8) translate(-5px, -5px);
-    transform-origin: top left;
-    transition: all 0.2s cubic-bezier(0.2, 0, 0.2, 1);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.custom-cursor.with-label .cursor-label {
-    opacity: 1;
-    transform: scale(1) translate(0, 0);
-}
 
 /* Side Navigation Dots */
 .side-nav {
