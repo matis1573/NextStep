@@ -42,7 +42,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: auto !important;
+    cursor: none !important;
 }
 
 .hidden {
@@ -55,7 +55,7 @@ html {
     /* Firefox */
     -ms-overflow-style: none;
     /* IE and Edge */
-    cursor: auto !important;
+    cursor: none !important;
 }
 
 html.lenis {
@@ -86,7 +86,7 @@ html::-webkit-scrollbar {
 body {
     scrollbar-width: none;
     -ms-overflow-style: none;
-    cursor: auto !important;
+    cursor: none !important;
 }
 
 body::-webkit-scrollbar {
@@ -142,7 +142,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
-    cursor: auto;
+    cursor: none;
     padding: 6rem 0;
     /* Adjusted padding now that hero is gone */
 }
@@ -151,8 +151,56 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none !important;
+    /* Forces inputs to go through */
+    z-index: 2147483647;
+    /* Maximum Safe Integer for CSS z-index */
+    will-change: transform;
+    mix-blend-mode: normal;
+    /* Ensure it renders on top */
+}
 
+.cursor-visual {
+    width: 40px;
+    height: 40px;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M29.6 2.1L2.1 14.1C1.2 14.5 1.5 16 2.6 16.5L11.6 21L16 30C16.5 31 18 31.4 18.4 30.4L30.5 2.9C30.8 2.2 30.3 1.8 29.6 2.1Z' fill='%233B82F6'/%3E%3Cpath d='M29.6 2.1L12.6 18.8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform-origin: 0 0;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+}
 
+.custom-cursor.clicking .cursor-visual {
+    transform: scale(0.8);
+}
+
+.cursor-label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #3b82f6;
+    /* Default Blue */
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.8) translate(-5px, -5px);
+    transform-origin: top left;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.custom-cursor.with-label .cursor-label {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+}
 
 /* Side Navigation Dots */
 .side-nav {
